@@ -5,6 +5,7 @@ class LoginPage extends React.Component {
         this.state = {
             username: '',
             password: '',
+            captcha:'',
             submitted: false
         };
 
@@ -21,15 +22,15 @@ class LoginPage extends React.Component {
         e.preventDefault();
 
         this.setState({ submitted: true });
-        const { username, password } = this.state;
-        if (username && password) {
-            this.props.login(username, password);
+        const { username, password,captcha } = this.state;
+        if (username && password && captcha) {
+           console.log(username,password,captcha);
         }
     }
 
     render() {
         
-        const { username, password, submitted } = this.state;
+        const { username, password,captcha, submitted } = this.state;
         return (
             <div className="login-main">
             <div className="login-sub">
@@ -49,8 +50,15 @@ class LoginPage extends React.Component {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
+                    <div className={'form-group' + (submitted && !captcha ? ' has-error' : '')}>
+                        <label htmlFor="password">Captcha</label>
+                        <input type="password" className="form-control" name="captcha" value={captcha} onChange={this.handleChange} />
+                        {submitted && !captcha &&
+                            <div className="help-block">captcha is required</div>
+                        }
+                    </div>
                     <div className="form-group">
-                    <button className="btn btn-primary">Login</button>
+                    <button className="my-btn color-blue register-btn">Login</button>
                     
                     </div>
                 </form>
