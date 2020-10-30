@@ -1,4 +1,5 @@
 import React from 'react';
+import RCG from 'react-captcha-generator';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
@@ -6,18 +7,32 @@ class LoginPage extends React.Component {
             username: '',
             password: '',
             captcha:'',
-            submitted: false
+            submitted: false,
+            reload: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.result = this.result.bind(this)
     }
 
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-
+    result(text) {
+        console.log("text", text);
+        // this.setState({
+        //   captcha: text
+        // })
+      }
+    //   refreshCaptch =() =>{
+    //     //this.forceUpdate();
+    //     this.setState(
+    //         {reload: true},
+    //         () => this.setState({reload: false})
+    //       )
+    //   }
     handleSubmit(e) {
         e.preventDefault();
 
@@ -51,8 +66,14 @@ class LoginPage extends React.Component {
                         }
                     </div>
                     <div className={'form-group' + (submitted && !captcha ? ' has-error' : '')}>
+                    
                         <label htmlFor="password">Captcha</label>
-                        <input type="password" className="form-control" name="captcha" value={captcha} onChange={this.handleChange} />
+                       <span class="captcharesult">
+                        <RCG  result={this.result} /> 
+                        {/* <button type="submit" onClick={this.refreshCaptch}>  Refresh  </button> */}
+                        
+                        
+                         </span> <input type="password" className="form-control" name="captcha" value={captcha} onChange={this.handleChange} />
                         {submitted && !captcha &&
                             <div className="help-block">captcha is required</div>
                         }

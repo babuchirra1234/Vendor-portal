@@ -1,46 +1,57 @@
-
 import React, { Component } from 'react';
-import { ReCaptcha } from 'react-recaptcha-google'
-class ExampleComponent extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
-    this.verifyCallback = this.verifyCallback.bind(this);
-  }
-  componentDidMount() {
-    if (this.captchaDemo) {
-        console.log("started, just a second...")
-        this.captchaDemo.reset();
+//import './App.css';
+import RCG from 'react-captcha-generator';
+
+class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      captcha: ''
     }
+    this.check = this.check.bind(this)
+    this.result = this.result.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+   // this.captchaRefresh = this.captchaRefresh(this)
   }
-  onLoadRecaptcha() {
-      if (this.captchaDemo) {
-          this.captchaDemo.reset();
-      }
-  }
-  verifyCallback(recaptchaToken) {
-    // Here you will get the final recaptchaToken!!!  
-    console.log(recaptchaToken, "<= your recaptcha token")
-  }
+
   render() {
     return (
-      <div>
-        {/* You can replace captchaDemo with any ref word */}
-        <ReCaptcha
-            ref={(el) => {this.captchaDemo = el;}}
-            size="normal"
-            data-theme="dark"            
-            render="explicit"
-            sitekey="your_site_key"
-            onloadCallback={this.onLoadRecaptcha}
-            verifyCallback={this.verifyCallback}
-        />
-        <code>
-          1. Add <strong>your site key</strong> in the ReCaptcha component. <br/>
-          2. Check <strong>console</strong> to see the token.
-        </code>
+      <div className="App">
+         <RCG result={this.result} /><button type="submit" onClick={() => window.location.reload(false)}>Refresh</button>
+        <form onSubmit={this.handleClick}>
+          <input type='text' className={'xxx'} ref={ref => this.captchaEnter = ref} />
+          <input type='submit' />
+        </form>
+       
       </div>
     );
-  };
-};
-export default ExampleComponent;
+  }
+  // captchaRefresh(e){
+  //   window.location.reload(false);
+  // }
+  handleClick(e) {
+    e.preventDefault();
+    this.check()
+  }
+
+  result(text) {
+    console.log("text", text);
+    this.setState({
+      captcha: text
+    })
+  }
+  
+  check() {
+if(this.state.captcha === this.captchaEnter.value){
+  console.log("hello")
+}else{
+  console.log("hello1")
+}
+
+   // console.log(this.state.captcha, this.captchaEnter.value, this.state.captcha === this.captchaEnter.value)
+  }
+
+}
+
+export default App;
