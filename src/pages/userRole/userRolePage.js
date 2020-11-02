@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import Input from "../../Components/Input";
+import { Multiselect } from 'multiselect-react-dropdown';
 
 import SelectComponent from '../../Components/SelectComponent'
 import TextAreaComponent from "../../Components/TextAreaComponent";

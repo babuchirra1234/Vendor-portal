@@ -5,24 +5,19 @@ class OtpPage extends React.Component {
         this.state = {
             otpNamber: '',
             submitted: false
-            
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    handleChange(e) {
+ handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-
     handleSubmit(e) {
         e.preventDefault();
-
-        this.setState({ submitted: true });
+ this.setState({ submitted: true });
         const { otpNamber} = this.state;
-        if (otpNamber) {
+        if (otpNamber== 12345 ) {
            console.log(otpNamber);
         }
     }

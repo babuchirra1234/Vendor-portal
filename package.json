@@ -9,6 +9,7 @@
     "@types/react-select": "^3.0.22",
     "ag-grid": "^18.1.2",
     "ag-grid-community": "^24.0.0",
+    "ag-grid-enterprise": "^24.1.0",
     "ag-grid-react": "^24.0.0",
     "apexcharts": "^3.22.0",
     "axios": "^0.20.0",
